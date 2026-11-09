@@ -1,0 +1,22 @@
+name: Publish demo
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - apps/web/**
+      - apps/shared/**
+      - pnpm-lock.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  redeploy-portfolio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rebuild eli7pm.me so /invoicer picks up this commit
+        env:
+          GH_TOKEN: ${{ secrets.PORTFOLIO_DISPATCH_TOKEN }}
+        run: gh workflow run deploy.yml -R eli7pm/eli-portfolio --ref main

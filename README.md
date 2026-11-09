@@ -208,6 +208,16 @@ This updates dependencies within their version ranges and runs `pnpm audit`. **C
 
 To finish, commit and push any changes, then in Render choose **Manual Deploy › Clear build cache & deploy**. With `RENDER_API_KEY` and `RENDER_SERVICE_ID` set, the script starts that deploy itself.
 
+## GitHub Actions
+
+| Workflow | When | What it does |
+| --- | --- | --- |
+| `ci.yml` (Checks) | every pull request and push to `master` | installs, lints and builds the web app, syntax-checks the API, shared code and CLI, and runs `pnpm audit --prod` |
+| `publish-demo.yml` (Publish demo) | push to `master` that touches `apps/web`, `apps/shared` or the lockfile, or by hand | starts eli7pm.me's deploy, which rebuilds the demo at `/invoicer/` |
+
+- **Publish demo needs a secret:** `PORTFOLIO_DISPATCH_TOKEN`, a fine-grained GitHub token with **Actions: read and write** on `eli7pm/eli-portfolio` only.
+- **The API deploys separately:** Render redeploys it on its own when `apps/api`, `apps/shared`, the `Dockerfile` or the lockfile change on `master`.
+
 ## Environment variables
 
 **API** (`.env` or the host's settings):
