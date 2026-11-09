@@ -177,9 +177,10 @@ The web app keeps its own copy of the currency and tax ID lists (`src/currency.j
 pnpm install
 cp .env.example .env   # only needed for sending email
 pnpm api               # API on http://localhost:3100
-pnpm web               # web on http://localhost:5173 (or the next free port)
+pnpm web               # web on http://localhost:5174 (or the next free port)
 ```
 
+- **Ports:** the web app starts on **5174** (set `WEB_PORT` to change it), so the portfolio's "Live demo" link can find it on 5173's neighbor.
 - **Use two terminals,** one for `pnpm api` and one for `pnpm web`. The web dev server forwards `/api/*` to port **3100** (set `API_PORT` to change it).
 - **The API uses port 3100** because 3000 is often taken by other projects. If the preview returns **502**, the API isn't running.
 - **Chrome:** locally, the API uses your installed Google Chrome. Set `PUPPETEER_EXECUTABLE_PATH` to use another Chrome or Chromium.
@@ -227,7 +228,7 @@ To finish, commit and push any changes, then in Render choose **Manual Deploy â€
 | `BASE_PATH` | `/` | URL path the app is served from (`/invoicer/` on eli7pm.me) |
 | `VITE_API_URL` | same origin | where the API lives, e.g. `https://<your-api>.up.railway.app` |
 | `VITE_SEND_ENABLED` | `false` | `true` enables the Send button and email field |
-| `VITE_PORTFOLIO_URL` | `https://eli7pm.me/` | where the logo links |
+| `VITE_PORTFOLIO_URL` | `https://eli7pm.me/` (`http://localhost:5173/` in dev) | where the logo links |
 
 ## Dependencies and security
 
