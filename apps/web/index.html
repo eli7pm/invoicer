@@ -1,12 +1,26 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Invoicer — by Eli</title>
-  <meta name="description" content="A simple invoice generator built with React and Nutrient." />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoicer · eli7pm</title>
+    <meta name="description" content="A small invoice generator by Eliezer (Eli) Payano: fill in the form and get a PDF rendered with headless Chrome." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script>
+      try {
+        const saved = localStorage.getItem("eli7pm-ui")
+        const t = saved ? JSON.parse(saved).state.theme : null
+        if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches))
+          document.documentElement.classList.add("dark")
+        const urlLang = new URLSearchParams(location.search).get("lang")?.toLowerCase()
+        const savedLang = localStorage.getItem("invoicer-locale")
+        const lang = urlLang === "es" || urlLang === "en" ? urlLang : savedLang ? JSON.parse(savedLang).state.lang : navigator.language.toLowerCase().startsWith("es") ? "es" : "en"
+        document.documentElement.lang = lang === "es" ? "es" : "en"
+      } catch (e) {}
+    </script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

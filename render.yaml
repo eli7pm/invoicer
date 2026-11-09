@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: invoicer-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    buildFilter:
+      paths:
+        - apps/api/**
+        - apps/shared/**
+        - Dockerfile
+        - pnpm-lock.yaml
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://eli7pm.me
+      - key: SEND_ENABLED
+        value: "false"
+      - key: MAX_CONCURRENT_RENDERS
+        value: "1"
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false

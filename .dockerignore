@@ -1,0 +1,9 @@
+**/node_modules
+**/dist
+.git
+.idea
+.husky
+.env
+.env.*
+apps/web
+apps/cli
