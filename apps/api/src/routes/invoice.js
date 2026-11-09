@@ -115,7 +115,7 @@ router.post('/share', async (req, res) => {
   try {
     res.status(201).json(await saveShared(invoice));
   } catch (err) {
-    console.error('[share]', err.message);
+    console.error('[share]', String(err.message).split(/[.,]/)[0]);
     res.status(500).json({ error: 'Could not create the link.' });
   }
 });
@@ -127,7 +127,7 @@ router.get('/share/:id', async (req, res) => {
     res.setHeader('Cache-Control', 'private, max-age=300');
     res.json({ invoice });
   } catch (err) {
-    console.error('[share]', err.message);
+    console.error('[share]', String(err.message).split(/[.,]/)[0]);
     res.status(500).json({ error: 'Could not load the invoice.' });
   }
 });
