@@ -2,19 +2,19 @@
   "name": "shared",
   "version": "1.0.0",
   "main": "generateHTML.cjs",
-  "module": "generateHTML.js",
+  "module": "generateHTML.mjs",
   "exports": {
     ".": {
-      "import": "./generateHTML.js",
+      "import": "./generateHTML.mjs",
       "require": "./generateHTML.cjs"
     },
     "./pdf": "./pdf.js",
     "./mailer": "./mailer.js"
   },
   "license": "ISC",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@12.18.0",
   "dependencies": {
-    "puppeteer": "^25.0.4",
-    "resend": "^6.12.3"
+    "puppeteer": "^25.16.0",
+    "resend": "^6.37.0"
   }
 }

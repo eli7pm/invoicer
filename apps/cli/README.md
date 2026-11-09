@@ -4,9 +4,9 @@ Generate and send PDF invoices from the terminal.
 
 ## Requirements
 
-- Node.js 22+
-- Google Chrome installed at `/Applications/Google Chrome.app`
-- A configured `.env` at the project root
+- Node.js 26+ (see the root `.nvmrc`)
+- Google Chrome installed at `/Applications/Google Chrome.app`, or `PUPPETEER_EXECUTABLE_PATH` pointing to Chrome or Chromium
+- A configured `.env` at the project root (only for sending email)
 
 ## Install
 

@@ -6,7 +6,7 @@ const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 const { generateHTML } = require('shared');
-const { htmlToPdf } = require('shared/pdf');
+const { htmlToPdf, closeBrowser } = require('shared/pdf');
 const { sendInvoiceEmail } = require('shared/mailer');
 
 const now = new Date();
@@ -108,6 +108,7 @@ async function main() {
   console.log(chalk.dim('\n  Generating PDF...'));
   const html = generateHTML(values);
   const pdf = await htmlToPdf(html);
+  await closeBrowser();
 
   if (answers.sendEmail && answers.recipientEmail) {
 
