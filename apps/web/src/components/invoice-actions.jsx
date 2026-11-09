@@ -48,7 +48,8 @@ export function InvoiceActions() {
 
   const onWhatsApp = () =>
     run('whatsapp', async () => {
-      const tab = window.open('', '_blank')
+      const onPhone = window.matchMedia('(pointer: coarse)').matches
+      const tab = onPhone ? null : window.open('', '_blank')
       const state = useInvoiceStore.getState()
       const payload = invoicePayload(state)
       const base = `${location.origin}${import.meta.env.BASE_URL}?lang=${lang}`
@@ -64,9 +65,16 @@ export function InvoiceActions() {
       const shown = location.hostname === 'localhost' ? link.replace(/^http:\/\//, '') : link
       const summary = t.whatsappMessage(payload.invoiceNumber, formatMoney(invoiceTotal(payload.lineItems), payload.currency))
       const text = [state.invoice.shareMessage?.trim(), summary, shown].filter(Boolean).join('\n')
-      const whatsapp = `https://wa.me/?text=${encodeURIComponent(text)}`
-      if (tab) tab.location.href = whatsapp
-      else window.location.href = whatsapp
+      const web = `https://wa.me/?text=${encodeURIComponent(text)}`
+      if (!onPhone) {
+        if (tab) tab.location.href = web
+        else window.location.href = web
+        return
+      }
+      window.location.href = `whatsapp://send?text=${encodeURIComponent(text)}`
+      window.setTimeout(() => {
+        if (document.visibilityState === 'visible') window.location.href = web
+      }, 1500)
     })
 
   const spinnerOr = (name, icon) => (action === name && (loading || name === 'whatsapp') ? <LoaderCircle size={14} className="spin" /> : icon)

@@ -125,6 +125,7 @@ Shared state lives in four Zustand stores. Each one saves to `localStorage`, so 
 - **Dates:** a calendar in the page's language (weeks start on Monday in Spanish), shown as `9 nov 2026`, stored as `2026-11-09`.
 - **PDF:** **Preview PDF** opens it in a new tab; **Download PDF** saves `invoice-<number>.pdf` (`factura-…` in Spanish).
 - **WhatsApp:** opens WhatsApp (app or web) with a message like "Factura N.º 12: RD$30,000.00" and a short link such as `eli7pm.me/invoicer/?lang=es&i=k3Xp9qWa`. It works the same on phones and computers.
+  - **Phones vs computers:** on phones it opens the WhatsApp app directly (`whatsapp://send`) so the "send to" list appears, falling back to `wa.me` if the app isn't installed. On computers it opens `wa.me` in a new tab.
   - **Your own message (optional):** the "WhatsApp message" box above the buttons adds a line before the summary, like "¡Hola! Aquí tienes la factura de noviembre." It's saved with the draft.
   - **Local links:** on `localhost` the link is written without `http://`.
   - **How it's stored:** the API keeps the invoice in Upstash Redis for **30 days**, and Redis deletes it on its own after that.
